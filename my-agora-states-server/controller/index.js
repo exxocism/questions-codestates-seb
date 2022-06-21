@@ -58,7 +58,7 @@ const discussionsController = {
 
   createOne: (req, res) => {
     const { title, author, bodyHTML, avatarUrl } = req.body;
-    console.log(req.body, req.url)
+
     if (handleRequestBody(req, res) !== true) return;
     const id = parseInt(Math.random() * 10000)
     const url = "https://github.com/codestates-seb/agora-states-fe/discussions/" + id
