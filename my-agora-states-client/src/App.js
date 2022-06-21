@@ -44,7 +44,6 @@ function App() {
   }
 
   const deleteDiscussion = ((id) => {
-    console.log('delete?')
     fetch(domain + `/discussions/${id}`, { 
         method: 'DELETE', 
       })
