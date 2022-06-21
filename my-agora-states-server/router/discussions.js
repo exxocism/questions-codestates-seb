@@ -11,7 +11,7 @@ router.get('/', findAll);
 router.get('/:id', findById);
 
 // TODO: discussion 하나를 생성하는 라우터를 작성합니다.
-router.post('/:id', createOne);
+router.post('/', createOne);
 
 // TODO: discussion 하나를 수정하는 라우터를 작성합니다.
 router.put('/:id', updateById);

@@ -9,8 +9,8 @@ const getPageStartEnd = (limit, page) => {
 
 const handleRequestBody = (req, res) => {
   if (!req.body) return res.status(400).send("no request body");
-  const { id, title, url, author, bodyHTML, avatarUrl } = req.body;
-  if (!id && !title && !url && !author && !bodyHTML && !avatarUrl) return res.status(400).send("bad request")
+  const { title, author, bodyHTML } = req.body;
+  if (!title && !author && !bodyHTML) return res.status(400).send("bad request")
   return true;
 }
 
@@ -57,8 +57,11 @@ const discussionsController = {
   },
 
   createOne: (req, res) => {
-    const { id, title, url, author, bodyHTML, avatarUrl } = req.body;
+    const { title, author, bodyHTML, avatarUrl } = req.body;
+    console.log(req.body, req.url)
     if (handleRequestBody(req, res) !== true) return;
+    const id = parseInt(Math.random() * 10000)
+    const url = "https://github.com/codestates-seb/agora-states-fe/discussions/" + id
     const newDiscussion = {
       id,
       createdAt: new Date().toISOString(),
@@ -69,13 +72,13 @@ const discussionsController = {
       bodyHTML,
       avatarUrl,
     };
-    discussionsData.push(newDiscussion);
+    discussionsData.unshift(newDiscussion);
     return res.status(201).send("resource created successfully: ID " + id);
   },
 
   updateById: (req, res) => {
     if (handleRequestBody(req, res) !== true) return;
-    const idx = discussionsData.findIndex((d) => d.id === req.params.id);
+    const idx = discussionsData.findIndex((d) => d.id === Number(req.params.id));
     const updated = {
       ...discussionsData[idx],
       ...req.body,
@@ -91,7 +94,7 @@ const discussionsController = {
   },
 
   deleteById: (req, res) => {
-    const idx = discussionsData.findIndex((d) => d.id === req.params.id);
+    const idx = discussionsData.findIndex((d) => d.id === Number(req.params.id));
     if (idx !== -1) {
       discussionsData.splice(idx, 1);
       return res.status(202).send("resource deleted successfully");
