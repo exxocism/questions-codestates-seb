@@ -62,6 +62,7 @@ const discussionsController = {
 
     if (handleRequestBody(req, res) !== true) return;
     const id = parseInt(Math.random() * 10000);
+    const avartarId = parseInt(Math.random() * 100);
     const url =
       "https://github.com/codestates-seb/agora-states-fe/discussions/" + id;
     const newDiscussion = {
@@ -72,8 +73,7 @@ const discussionsController = {
       author,
       answer: null,
       bodyHTML,
-      avatarUrl:
-        "https://avatars.githubusercontent.com/u/12145019?s=64&u=5c97f25ee02d87898457e23c0e61b884241838e3&v=4",
+      avatarUrl: `https://randomuser.me/api/portraits/men/${avartarId}.jpg`,
     };
     discussionsData.unshift(newDiscussion);
     return res.status(201).send("resource created successfully: ID " + id);
