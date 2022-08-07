@@ -41,7 +41,7 @@ function App() {
     fetch(domain + `/discussions/${id}`, {
       method: "DELETE",
     }).then((res) => {
-      if (res.status === 202 || 204) {
+      if (res.status === 202 || res.status === 204) {
         getDiscussion();
       }
     });
