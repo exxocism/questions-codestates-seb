@@ -10,9 +10,10 @@ const getPageStartEnd = (limit, page) => {
 const handleRequestBody = (req, res) => {
   if (!req.body) return res.status(400).send("no request body");
   const { title, author, bodyHTML } = req.body;
-  if (!title && !author && !bodyHTML) return res.status(400).send("bad request")
+  if (!title && !author && !bodyHTML)
+    return res.status(400).send("bad request");
   return true;
-}
+};
 
 const discussionsController = {
   findAll: (req, res) => {
@@ -43,25 +44,26 @@ const discussionsController = {
       return res.status(200).json(responseBody.slice(pageStart, pageEnd));
     }
 
-    return res.status(404).send('Not found');
+    return res.status(404).send("Not found");
   },
 
   findById: (req, res) => {
     const { id } = req.params;
-    const found = discussionsData.find((d) => d.id === Number(id))
+    const found = discussionsData.find((d) => d.id === Number(id));
     if (found) {
       return res.status(200).json(found);
     } else {
-      return res.status(404).send('Not found');
+      return res.status(404).send("Not found");
     }
   },
 
   createOne: (req, res) => {
-    const { title, author, bodyHTML, avatarUrl } = req.body;
+    const { title, author, bodyHTML } = req.body;
 
     if (handleRequestBody(req, res) !== true) return;
-    const id = parseInt(Math.random() * 10000)
-    const url = "https://github.com/codestates-seb/agora-states-fe/discussions/" + id
+    const id = parseInt(Math.random() * 10000);
+    const url =
+      "https://github.com/codestates-seb/agora-states-fe/discussions/" + id;
     const newDiscussion = {
       id,
       createdAt: new Date().toISOString(),
@@ -70,7 +72,8 @@ const discussionsController = {
       author,
       answer: null,
       bodyHTML,
-      avatarUrl,
+      avatarUrl:
+        "https://avatars.githubusercontent.com/u/12145019?s=64&u=5c97f25ee02d87898457e23c0e61b884241838e3&v=4",
     };
     discussionsData.unshift(newDiscussion);
     return res.status(201).send("resource created successfully: ID " + id);
@@ -78,14 +81,16 @@ const discussionsController = {
 
   updateById: (req, res) => {
     if (handleRequestBody(req, res) !== true) return;
-    const idx = discussionsData.findIndex((d) => d.id === Number(req.params.id));
+    const idx = discussionsData.findIndex(
+      (d) => d.id === Number(req.params.id)
+    );
     const updated = {
       ...discussionsData[idx],
       ...req.body,
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
-    if (idx !== -1) { 
+    if (idx !== -1) {
       discussionsData.splice(idx, 1, updated);
       return res.status(200).send("resource updated successfully");
     } else {
@@ -94,7 +99,9 @@ const discussionsController = {
   },
 
   deleteById: (req, res) => {
-    const idx = discussionsData.findIndex((d) => d.id === Number(req.params.id));
+    const idx = discussionsData.findIndex(
+      (d) => d.id === Number(req.params.id)
+    );
     if (idx !== -1) {
       discussionsData.splice(idx, 1);
       return res.status(202).send("resource deleted successfully");

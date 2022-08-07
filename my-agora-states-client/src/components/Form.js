@@ -1,13 +1,11 @@
 export const Form = ({ addDiscussion }) => {
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target[0])
     const author = event.target[0].value;
     const title = event.target[1].value;
     const bodyText = event.target[2].value;
-    addDiscussion({ author, title, bodyText})
-  }
+    addDiscussion({ author, title, bodyText });
+  };
 
   return (
     <section className="form__container">

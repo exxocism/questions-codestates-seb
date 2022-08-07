@@ -21,7 +21,7 @@ textarea {
     font-size: 100%; /* 1 */
     vertical-align: baseline; /* 3 */
     line-height: normal;
-    *vertical-align: middle; /* 3 */
+    vertical-align: middle; /* 3 */
 }
 
 body {
