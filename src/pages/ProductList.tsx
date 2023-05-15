@@ -1,4 +1,4 @@
-const App = () => {
+const ProductList = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,4 +18,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ProductList;
