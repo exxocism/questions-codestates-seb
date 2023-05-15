@@ -26,10 +26,41 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ],
+    "rules": {
+      "@typescript-eslint/interface-name-prefix": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "react/jsx-filename-extension": [
+        2,
+        {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      ],
+      "prettier/prettier": [
+        "off",
+        {
+          "printWidth": 100,
+          "singleQuote": true,
+          "trailingComma": "all"
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
